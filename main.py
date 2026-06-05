@@ -123,5 +123,6 @@ Trả lời bằng 1 ký tự: A, B, C hoặc D. Chỉ viết ký tự, không g
         sources=retrieved_contexts
     )
 
-# uv run uvicorn main:app --host 192.168.50.67 --port 5000
+# uv run uvicorn main:app --host 0.0.0.0 --port 5000 hoặc uv run uvicorn main:app --host 0.0.0.0 --port 5000 -reload
 # uv run python trigger.py
+# http://localhost:5000/docs
