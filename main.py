@@ -95,13 +95,13 @@ async def ask_question(req: AskRequest):
     context_text = "\n---\n".join(retrieved_contexts)
     
     # 3. Tạo Prompt ép LLM trả lời 1 ký tự
-    prompt = f"""Dựa vào ngữ cảnh dưới đây, hãy trả lời câu hỏi trắc nghiệm. 
-BẮT BUỘC CHỈ ĐƯỢC IN RA 1 KÝ TỰ DUY NHẤT LÀ ĐÁP ÁN ĐÚNG (A, B, C, hoặc D). Không giải thích gì thêm.
+    prompt = f"""Câu hỏi trắc nghiệm:
+{req.question}
 
-Ngữ cảnh:
+Ngữ cảnh liên quan:
 {context_text}
 
-Câu hỏi: {req.question}"""
+Trả lời bằng 1 ký tự: A, B, C hoặc D. Chỉ viết ký tự, không giải thích."""
 
     # 4. Gọi LLM qua Proxy [cite: 126, 133, 134, 135, 136]
     response = proxy_client.chat.completions.create(
@@ -122,3 +122,6 @@ Câu hỏi: {req.question}"""
         answer=final_answer,
         sources=retrieved_contexts
     )
+
+# uv run uvicorn main:app --host 192.168.50.67 --port 5000
+# uv run python trigger.py
